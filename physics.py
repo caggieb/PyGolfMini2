@@ -51,7 +51,7 @@ def position(vel, pos):
 
 
 #purely testing purpose
-while abs(acvel(f,0,velo)[1]) > 0.4:
+while abs(acvel(f,direct,velo)[1]) > 0.4:
     
     velo = acvel(f,direct,velo)[0]
     posi = position(velo, posi)
