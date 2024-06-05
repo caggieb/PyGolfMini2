@@ -32,7 +32,6 @@ def acvel(force, direction, vel):
     velx += accx
     vely += accy
 
-
     direction = np.arctan2(vely, velx)
 
     speed = ((velx**2)+(vely**2))
