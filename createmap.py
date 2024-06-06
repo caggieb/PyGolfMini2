@@ -1,31 +1,42 @@
 import pygame as pg
+import sys
 
 NEIGHBOUR_OFFSETS = [(-1, 0), (-1, -1), (0, -1), (1, -1), (1, 0), (0, 0), (-1, 1), (0, 1), (1, 1)]
 
 class MapCreator:
-    def __init__(self, surf, tile_dim = 16):
-            self.map = [open(map).readlines()[i].strip('\n') for i in range(len(open(map).readlines()))]
+    def __init__(self, game, surf, maps ='maps/testmap.txt' , tile_dim = 16):
+            self.map = [open(maps).readlines()[i].strip('\n') for i in range(len(open(maps).readlines()))]
             self.tile_dim = tile_dim
             self.display = surf
-            
-            self.tilemap = []
-            
-            
+            self.game = game
+            self.map = {} # dictionary of dictionaries with position as the key and the type and tile variation as the value
 
     def tiles_nearby(self, pos): #this is necessary 
         tiles = []
         tiles_loc = (int(pos[0] // self.tile_dim), int(pos[1] // self.tile_dim))
         for near in NEIGHBOUR_OFFSETS:
-            check_pos = str(pos[0] + near[0]) +  ':' + str(pos[1] + near[1])
-            if check_pos in self.tile_map:
-                tiles.append(self.tilemap)
+            check_pos = str(pos[0] + tiles_loc[0]) +  ':' + str(pos[1] + tiles_loc[1])
+            if check_pos in self.map:
+                tiles.append(self.map)
         return tiles
                 
     def map_tiles(self):
-        pass
-    
-    
-    
-    def block_position(self):
+        for y, row in enumerate(self.map):
+            for x, tile in enumerate(row):
+                loc = str(x) + ':' + str(y)
+                if int(tile) == 0:
+                    self.map[loc] = {'type' : 'walls', 'variant' : 1, 'pos' : [x, y]}
+                elif int(tile) == 1:
+                    self.map[loc] = {'type' : 'grass', 'variant' : 1, 'pos' : [x, y]}
+                elif int(tile) == 9:
+                    self.map[loc] = {'type' : 'empty', 'variant' : 1, 'pos' : [x, y]}
+                    
         
-        pass
+    
+    def render(self, surf, offset= (0, 0)):
+        for x in range(offset[0] // self.tile_dim):
+            for y in range(offset[1] // self.tile_dim):
+                loc = str(x) + ':' + str(y)
+                if loc in self.map:
+                    tile = self.tile_dim[loc]
+                    surf.blit(self.game.assets[tile['type']][tile['variant']], (0, 0))
