@@ -2,15 +2,15 @@ import numpy as np
 import time
 
 f = 10 #shot power
-f_multiplier = 0.01 
+f_multiplier = 0.08 
 i = 0
 
 velo = [0,0] #starting velocity
 posi = [0,0] #starting position
-direct = 0   #starting direction in rads
+direct = np.pi/3   #starting direction in rads
 
 def force(speed):
-    force = -f_multiplier * speed
+    force = -f_multiplier * speed**(1/2)
     return force
 
 def bounce(state, direction, vel):
@@ -27,8 +27,6 @@ def bounce(state, direction, vel):
     else:
         direction = direction
 
-    #print(velx)
-
     vel = [velx, vely]
     return direction, vel
 
@@ -40,12 +38,9 @@ def acvel(force, direction, vel):
     velx = vel[0]
     vely = vel[1]
 
-    print(velx)
-
     velx += accx
     vely += accy
 
-    print(velx)
 
     direction = np.arctan(vely/velx)
 
@@ -71,14 +66,16 @@ while i < 20:
  
 
     if i == 10:
-        state = "vertical"
+        state = "horizontal"
     else:
         state = 0
     
-    direct = bounce(state, direct, velo)[0]
+    direct, velo = bounce(state, direct, velo)
+    
     velo = acvel(f,direct,velo)[0]
     posi = position(velo, posi)
     
+    print(velo)
 
     f = force(acvel(f,direct,velo)[1])
     
