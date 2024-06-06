@@ -60,7 +60,7 @@ def position(vel, pos):
     pos = [x,y]
     return pos
 
-
+"""
 #purely testing purpose
 while i < 20:
  
@@ -81,3 +81,4 @@ while i < 20:
     
     i += 1
     time.sleep(0.1)
+"""
