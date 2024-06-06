@@ -3,7 +3,8 @@ import os
 
 def images_load(folderpath):
     images = []
+    files = os.listdir(folderpath)
+    for file in files:
+        images.append(pg.image.load(open(folderpath + '/' + file)).convert)
     
-    for image in folderpath:
-        images.append(pg.image.load(image))
-    
+    return images

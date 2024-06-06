@@ -3,7 +3,7 @@ import sys
 
 
 from createmap import MapCreator
-
+from utilities import images_load
 
 
 class Main:
@@ -16,7 +16,7 @@ class Main:
         self.clock = pg.time.Clock()
         
         self.assets = {
-            'grass' : [],
+            'grass' : images_load('images/ground'),
             'green' : [],
             'walls' : [],
         }
