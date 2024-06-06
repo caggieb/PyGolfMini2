@@ -23,7 +23,8 @@ class Main:
             'walls' : images_load('images/walls'),
             'empty' :0,
             'ball'  : images_load('images/balls'),
-            'powerbar' : images_load('images/interface')
+            'powerbar' : images_load('images/interface'),
+            'start' : images_load('images/start')
         }
         #print(self.assets['walls'])
         #instantiate all necessary classes

@@ -25,20 +25,16 @@ class MapCreator:
             for x, tile in enumerate(row):
                 loc = str(x) + ':' + str(y)
                 if int(tile) == 0:
-                    self.map[loc] = {'type' : 'walls', 'variant' : 1, 'pos' : [x, y]}
-                if int(tile) == 5:
-                    self.map[loc] = {'type' : 'walls', 'variant' : 2, 'pos' : [x, y]} #vertical left walls
-                elif int(tile) == 7:
-                    self.map[loc] = {'type' : 'walls', 'variant' : 3, 'pos' : [x, y]} #vertical right walls
+                    self.map[loc] = {'type' : 'walls', 'variant' : 0, 'pos' : [x, y]} #vertical walls
                 elif int(tile) == 1:
-                    self.map[loc] = {'type' : 'grass', 'variant' : 1, 'pos' : [x, y]}
-                elif int(tile) == 9:
-                    pass#self.map[loc] = {'type' : 'empty', 'variant' : 1, 'pos' : [x, y]}
-                           
+                    self.map[loc] = {'type' : 'grass', 'variant' : 0, 'pos' : [x, y]}
+                elif int(tile) == 3:
+                    self.map[loc] = {'type' : 'start', 'variant' : 0, 'pos' : [x, y]}
+                    
     def render(self, surf, offset= (0, 0)):
         for x in range(int(offset[0] // self.tile_dim), self.display.get_width()):
             for y in range(int(offset[1] // self.tile_dim), self.display.get_height()):
                 loc = str(x) + ':' + str(y)
                 if loc in self.map:
                     tile = self.map[loc]
-                    surf.blit(self.game.assets[tile['type']][tile['variant'] - 1], (x * self.tile_dim - offset[0], y * self.tile_dim - offset[1]))
+                    surf.blit(self.game.assets[tile['type']][tile['variant']], (x * self.tile_dim - offset[0], y * self.tile_dim - offset[1]))
