@@ -26,10 +26,14 @@ class MapCreator:
                 loc = str(x) + ':' + str(y)
                 if int(tile) == 0:
                     self.map[loc] = {'type' : 'walls', 'variant' : 1, 'pos' : [x, y]}
+                if int(tile) == 5:
+                    self.map[loc] = {'type' : 'walls', 'variant' : 2, 'pos' : [x, y]} #vertical left walls
+                elif int(tile) == 7:
+                    self.map[loc] = {'type' : 'walls', 'variant' : 3, 'pos' : [x, y]} #vertical right walls
                 elif int(tile) == 1:
                     self.map[loc] = {'type' : 'grass', 'variant' : 1, 'pos' : [x, y]}
                 elif int(tile) == 9:
-                    self.map[loc] = {'type' : 'empty', 'variant' : 1, 'pos' : [x, y]}
+                    pass#self.map[loc] = {'type' : 'empty', 'variant' : 1, 'pos' : [x, y]}
                            
     def render(self, surf, offset= (0, 0)):
         for x in range(int(offset[0] // self.tile_dim), self.display.get_width()):
@@ -37,4 +41,4 @@ class MapCreator:
                 loc = str(x) + ':' + str(y)
                 if loc in self.map:
                     tile = self.map[loc]
-                    surf.blit(self.game.assets['grass'][0], (x * self.tile_dim - offset[0], y * self.tile_dim - offset[1]))
+                    surf.blit(self.game.assets[tile['type']][tile['variant'] - 1], (x * self.tile_dim - offset[0], y * self.tile_dim - offset[1]))

@@ -4,7 +4,7 @@ import sys
 
 from createmap import MapCreator
 from utilities import images_load
-
+from physics import force, bounce, acvel, position
 
 class Main:
     def __init__(self):
@@ -13,15 +13,14 @@ class Main:
         pg.display.set_caption('ninja game')
         self.screen = pg.display.set_mode((640, 480))
         self.display = pg.Surface((320,240))
-        
         self.clock = pg.time.Clock()
-        
         self.assets = {
             'grass' : images_load('images/grass'),
             'green' : [],
-            'walls' : [],
+            'walls' : images_load('images/walls'),
+            'empty' :0
         }
-        
+        #print(self.assets['walls'])
         #instantiate all necessary classes
         self.map = MapCreator(self, self.screen)
         self.map.map_tiles()
@@ -31,9 +30,6 @@ class Main:
         
         
     def run(self):
-        
-         
-
         
         while self.running:
             for event in pg.event.get():
@@ -53,11 +49,6 @@ class Main:
             self.map.render(self.display, offset=self.offset)
             
             self.screen.blit(pg.transform.scale(self.display, self.screen.get_size()), (0, 0))
-            
-            
             pg.display.update()
             self.clock.tick(60)
-            
-        
-        
 Main().run()
