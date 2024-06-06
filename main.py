@@ -56,7 +56,7 @@ class Main:
 
             self.display.fill((0, 0, 0)) #provisional
             
-            self.interface.draw(self.display)
+            self.interface.draw(self.screen)
             self.map.render(self.display, offset=self.offset)
             
             self.screen.blit(pg.transform.scale(self.display, self.screen.get_size()), (0, 0))

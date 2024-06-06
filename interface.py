@@ -9,6 +9,7 @@ class PowerBar(pg.sprite.Sprite):
         
         self.display = pg.display.get_surface()
         self.rect = self.image.get_rect()
+        
         self.rect.midbottom = (29, 502)
         self.shoot = 0
         self.value = 0
