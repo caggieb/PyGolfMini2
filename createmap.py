@@ -6,7 +6,7 @@ NEIGHBOUR_OFFSETS = [(-1, 0), (0, -1), (1, 0),(0, 1)]
 #maps/testmap.txt
 PHYSICS_TILES = {'walls'}
 class MapCreator:
-    def __init__(self, game, surf, maps ='maze.txt' , tile_dim = 16):
+    def __init__(self, game, surf, maps ='maps/testmap.txt' , tile_dim = 16):
             self.mapfile = [open(maps).readlines()[i].strip('\n') for i in range(len(open(maps).readlines()))]
             self.tile_dim = tile_dim
             self.display = surf
@@ -44,8 +44,7 @@ class MapCreator:
                     
     def rects_around(self, pos):
         rects = []
-        self.end_rect = pg.Rect((self.end[0]) * self.tile_dim + 16, (self.end[0]) * self.tile_dim, 7, 7 )
-        end_rect = pg.Rect((self.end[0] - self.start[0]*1.25) * self.tile_dim, (self.end[0] - self.start[0]*1.25) * self.tile_dim + 60, 7, 7 )
+        self.end_rect = pg.Rect((self.end[0] - self.start[0]*1.25) * self.tile_dim + 16, (self.end[0]- self.start[1]*1.25) * self.tile_dim, 7, 7 )
         for tile in self.map.values():
             if tile['type'] in PHYSICS_TILES:
                 rects.append(pg.Rect((tile['pos'][0] - self.start[0]*1.25) * self.tile_dim , (tile['pos'][1] - self.start[1]*1.25) * self.tile_dim, self.tile_dim, self.tile_dim))
@@ -54,8 +53,6 @@ class MapCreator:
                     
                     
     def render(self, surf, offset= (0, 0)):
-        
-        surf.blit(self.game.assets['grass'][0], pg.Rect(192, 184, 7, 7))
         for x in range(int(offset[0] // self.tile_dim), int((offset[0] + surf.get_width()) // self.tile_dim + 1)):
             for y in range(int(offset[1] // self.tile_dim), int((offset[1] + surf.get_height()) // self.tile_dim + 1)):
                 loc = str(x) + ':' + str(y)

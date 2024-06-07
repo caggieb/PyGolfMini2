@@ -26,7 +26,6 @@ class Ball: #pg.Sprite.sprite
             
         
         rects, end_rect = tilemap.rects_around(self.pos)
-        
         print(end_rect)
         for rect in rects:
             if ball_rect.colliderect(rect):
@@ -41,7 +40,7 @@ class Ball: #pg.Sprite.sprite
                 elif int(self.pos[1] - self.image.get_width()) <= rect.bottom <= int(self.pos[1] + self.image.get_width()):
                     state = 'horizontal'
         
-        surf.blit(self.game.assets['grass'][0], end_rect)
+    
         
         if ball_rect.colliderect(end_rect):
             self.game.win = True
