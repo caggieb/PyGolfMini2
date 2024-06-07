@@ -6,8 +6,10 @@ import numpy as np
 from createmap import MapCreator
 from utilities import images_load
 #from physics import force, bounce, acvel, position
-from interface import PowerBar
+from interface import PowerBar, Main_menu
 from entities import Ball
+
+
 
 class Main:
     def __init__(self):
@@ -28,6 +30,7 @@ class Main:
             'flag' : images_load('images/flag')
         }
         
+        self.mainmenu = Main_menu()
         self.map = MapCreator(self, self.screen)
         self.map.map_tiles()
         self.direction = 0
@@ -63,6 +66,10 @@ class Main:
         while self.running:
             start_time = time.time()
             
+            self.mainmenu.handle_events(event)
+            self.mainmenu.draw()
+
+
             keys = pg.key.get_pressed()
             for event in pg.event.get():
                 if event.type == pg.QUIT:
