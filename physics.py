@@ -1,6 +1,6 @@
 import numpy as np
 
-f_multiplier = 0.3 
+f_multiplier = 0.1 
 
 def force(speed):
     force = -f_multiplier * speed**(1/2)

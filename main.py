@@ -36,8 +36,12 @@ class Main:
         self.arrow = pg.image.load('images/interface/arrow.png').convert_alpha()
         self.arrow = pg.transform.scale(self.arrow, (44, 60))
         
+<<<<<<< Updated upstream
         
         self.win = False
+=======
+        self.num = 0
+>>>>>>> Stashed changes
         
         self.powerbar = PowerBar(self)      
         self.shoot = None
@@ -65,7 +69,9 @@ class Main:
                     elif event.key == pg.K_s and keys[pg.K_SPACE]:
                         self.shoot = self.pwr_value
                         self.pwr_value = 0
+                        self.num += 1
                     
+            print(self.num)        
             
             if keys[pg.K_SPACE]:
                 self.pwr_value = min(self.pwr_value*1.02 + 1, 100.)
