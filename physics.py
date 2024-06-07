@@ -8,7 +8,7 @@ i = 0
 
 velo = [0,0] #starting velocity
 posi = [0,0] #starting position
-direct = np.pi/3   #starting direction in rads
+direct = -np.pi/3   #starting direction in rads
 
 positx = []
 posity = []
@@ -71,7 +71,7 @@ def position(vel, pos):
     pos = [x,y]
     return pos
 
-"""
+
 #purely testing purpose
 while i < 30:
  
@@ -80,7 +80,7 @@ while i < 30:
 
 
     if i == 10:
-        state = "vertical"
+        state = "horizontal"
     else:
         state = 0
     
@@ -91,10 +91,20 @@ while i < 30:
     velo = acvel(f,direct,velo)[0]
     posi = position(velo, posi)
     
-    print(velo)
+    print(acvel(f,direct,velo)[1])
 
     f = force(acvel(f,direct,velo)[1])
 
     i += 1
     time.sleep(0.1)
-"""
+
+# Create the plot
+plt.plot(positx, posity)
+
+# Add labels and title (optional)
+plt.xlabel('X Values')
+plt.ylabel('Y Values')
+plt.title('Line Plot Example')
+
+# Display the plot
+plt.show()
