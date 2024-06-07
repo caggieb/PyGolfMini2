@@ -33,7 +33,7 @@ class Main:
         self.map = MapCreator(self, self.screen)
         self.map.map_tiles()
         self.direction = 0
-        self.center_offset =  (- (self.display.get_width()//2 - self.map.start[0]* self.map.tile_dim*1.25), - (self.display.get_height()//2 - self.map.start[1]* self.map.tile_dim*1.25))
+        self.center_offset =  (- (self.display.get_width()//2 - self.map.start[0] * self.map.tile_dim * 1.25), - (self.display.get_height()//2 - self.map.start[1]* self.map.tile_dim*1.25))
         
         self.arrow = pg.image.load('images/interface/arrow.png').convert_alpha()
         self.arrow = pg.transform.scale(self.arrow, (44, 60))
@@ -126,11 +126,10 @@ class Main:
                 self.screen.blit(text_surface, text_rect)
                 
                 elapsed_time = time.time() - start_time
-                print(self.win)
+                
+                
                 if self.win:
                     self.screen.blit(self.win_text_surf, self.win_text_rect)
-                    time.sleep(300)
-                    self.running = False      
             
             pg.display.update()
             

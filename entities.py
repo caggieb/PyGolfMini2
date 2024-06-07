@@ -26,7 +26,7 @@ class Ball: #pg.Sprite.sprite
             
         
         rects, end_rect = tilemap.rects_around(self.pos)
-        print(end_rect)
+
         for rect in rects:
             if ball_rect.colliderect(rect):
                 if  int(self.pos[0] - self.image.get_width()) <= rect.left <= int(self.pos[0] + self.image.get_width()):
