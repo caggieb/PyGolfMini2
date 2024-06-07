@@ -16,7 +16,7 @@ class Ball: #pg.Sprite.sprite
         if self.game.shoot:
             power = self.game.shoot
             self.game.shoot = None   
-            
+        print(tilemap.rects_around)
         #if self.pos in tilemap.rects_around:
         #    print('gino')
             
