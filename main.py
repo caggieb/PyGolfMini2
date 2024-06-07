@@ -39,8 +39,6 @@ class Main:
         
         self.win = False
         self.num = 0
-        self.font = pg.font.Font("fonts\Pixeltype.ttf", 20)
-        self.black = (0,0,0)
         
         self.powerbar = PowerBar(self)      
         self.shoot = None
