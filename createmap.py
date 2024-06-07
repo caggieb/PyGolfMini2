@@ -13,6 +13,7 @@ class MapCreator:
             self.game = game
             self.map = {}
             self.start = None
+            self.end_rect = None
             # dictionary of dictionaries with position as the key and the type and tile variation as the value
 
     def tiles_nearby(self, pos): #this is necessary 
@@ -43,15 +44,16 @@ class MapCreator:
                     
     def rects_around(self, pos):
         rects = []
-        end_rect = pg.Rect((self.end[0] - self.start[0]*1.25) * self.tile_dim + 16, (self.end[0] - self.start[0]*1.25) * self.tile_dim + 16, 7, 7 )
+        self.end_rect = pg.Rect((self.end[0]) * self.tile_dim + 16, (self.end[0]) * self.tile_dim, 7, 7 )
         for tile in self.map.values():
             if tile['type'] in PHYSICS_TILES:
                 rects.append(pg.Rect((tile['pos'][0] - self.start[0]*1.25) * self.tile_dim , (tile['pos'][1] - self.start[1]*1.25) * self.tile_dim, self.tile_dim, self.tile_dim))
         
-        return rects, end_rect
+        return rects, self.end_rect
                     
                     
     def render(self, surf, offset= (0, 0)):
+        
         for x in range(int(offset[0] // self.tile_dim), int((offset[0] + surf.get_width()) // self.tile_dim + 1)):
             for y in range(int(offset[1] // self.tile_dim), int((offset[1] + surf.get_height()) // self.tile_dim + 1)):
                 loc = str(x) + ':' + str(y)

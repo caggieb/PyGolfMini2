@@ -95,8 +95,6 @@ class Main:
                 elif keys[pg.K_a]:
                     self.direction += - 0.01
                     
-                
-                
                 angle = (self.direction + np.pi) % (2 * np.pi) - np.pi
                 
                 self.rot_arrow = pg.transform.rotate(self.arrow, np.degrees(- angle - np.pi*0.5))
@@ -117,7 +115,7 @@ class Main:
                 self.powerbar.custom_update()
                 
                 
-                self.ball.physics(tilemap=self.map, direction= angle)
+                self.ball.physics(tilemap=self.map, direction= angle, surf=self.display)
                 self.screen.blit(pg.transform.scale(self.display, self.screen.get_size()), (0, 0))
                 
                 self.screen.blit(self.rot_arrow, self.rot_arrow_rect)
@@ -128,7 +126,7 @@ class Main:
                 self.screen.blit(text_surface, text_rect)
                 
                 elapsed_time = time.time() - start_time
-    
+                print(self.win)
                 if self.win:
                     self.screen.blit(self.win_text_surf, self.win_text_rect)
                     time.sleep(300)
