@@ -19,21 +19,15 @@ rnd2 = random.random()
 
 horimid = round((rnd2 * midinty)) + 4
 
-if 0 <= rnd1 <= 0.25:
+if 0 <= rnd1 <= 0.5:
     start = [map_width - 2, map_height - 2]
     end = [3,3]
 
-if 0.25 < rnd1 <= 0.5:
+if 0.5 < rnd1 <= 1:
     start = [3, map_height - 2]
     end = [map_width - 2,3]
 
-if 0.5 < rnd1 <= 0.75:
-    start = [map_width - 2, 3]
-    end = [3,map_height - 2]
 
-if 0.75 < rnd1 <= 1:
-    start = [3, 3]
-    end = [map_width - 2, map_height - 2]
 
 positions_to_update_start = [
         [start[0]-1, start[1]], [start[0]+1, start[1]],  # Left and right
@@ -86,9 +80,9 @@ for i in range(0,map_height):
         if [j+1,i+1] != start and [j+1,i+1] != end and apply1 != True :
             map_content[i] += "0"
         elif [j+1,i+1] == start:
-            map_content[i] += "3"
-        elif [j+1,i+1] == end:
             map_content[i] += "2"
+        elif [j+1,i+1] == end:
+            map_content[i] += "3"
         
 
     map_content.append("")

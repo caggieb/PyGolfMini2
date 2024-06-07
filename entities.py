@@ -17,6 +17,7 @@ class Ball: #pg.Sprite.sprite
         self.velocity = [0,0]
         
         
+        
     def physics(self, tilemap, direction, state = None, surf = None):
         ball_rect = pg.Rect(self.pos[0] - self.image.get_width()/2, self.pos[1] - self.image.get_height()/2, self.image.get_width(), self.image.get_height())
         
@@ -26,7 +27,6 @@ class Ball: #pg.Sprite.sprite
             
         
         rects, end_rect = tilemap.rects_around(self.pos)
-
         for rect in rects:
             if ball_rect.colliderect(rect):
                 if  int(self.pos[0] - self.image.get_width()) <= rect.left <= int(self.pos[0] + self.image.get_width()):
@@ -40,9 +40,8 @@ class Ball: #pg.Sprite.sprite
                 elif int(self.pos[1] - self.image.get_width()) <= rect.bottom <= int(self.pos[1] + self.image.get_width()):
                     state = 'horizontal'
         
-    
-        
         if ball_rect.colliderect(end_rect):
+
             self.game.win = True
     
         

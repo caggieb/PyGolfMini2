@@ -6,7 +6,7 @@ NEIGHBOUR_OFFSETS = [(-1, 0), (0, -1), (1, 0),(0, 1)]
 #maps/testmap.txt
 PHYSICS_TILES = {'walls'}
 class MapCreator:
-    def __init__(self, game, surf, maps ='maps/maze.txt' , tile_dim = 16):
+    def __init__(self, game, surf, maps ='maps/testmap.txt' , tile_dim = 16):
             self.mapfile = [open(maps).readlines()[i].strip('\n') for i in range(len(open(maps).readlines()))]
             self.tile_dim = tile_dim
             self.display = surf
