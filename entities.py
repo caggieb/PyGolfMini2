@@ -21,25 +21,25 @@ class Ball: #pg.Sprite.sprite
         ball_rect = pg.Rect(self.pos[0] - self.image.get_width()/2, self.pos[1] - self.image.get_height()/2, self.image.get_width(), self.image.get_height())
         
         if self.game.shoot:
-            self.power = self.game.shoot * 0.01
+            self.power = (self.game.shoot**0.5)
             self.game.shoot = None   
             
         #
     
         for rect in tilemap.rects_around(self.pos):
             if ball_rect.colliderect(rect):
-                if  int(self.pos[0]) <= rect.left <= int(self.pos[0] + self.image.get_width()/2):
+                if  int(self.pos[0] - self.image.get_width()) <= rect.left <= int(self.pos[0] + self.image.get_width()):
                     state = 'vertical'
                     #self.pos[0] = int(rect.left - self.image.get_width()/2)
                 
-                elif int(self.pos[0]) >= rect.right >= int(self.pos[0] - self.image.get_width()/2):
+                elif int(self.pos[0] + self.image.get_width()) >= rect.right >= int(self.pos[0] - self.image.get_width()):
                     #self.pos[0] = int(rect.right + self.image.get_width()/2)
                     state = 'vertical'
                     
-                elif int(self.pos[1]) >= rect.top >= int(self.pos[1] - self.image.get_width()/2):
+                elif int(self.pos[1] + self.image.get_width()) >= rect.top >= int(self.pos[1] - self.image.get_width()):
                     #self.pos[1] = int(rect.top - self.image.get_width()/2)
                     state = 'horizontal'
-                elif int(self.pos[1]) <= rect.bottom <= int(self.pos[1] + self.image.get_width()/2):
+                elif int(self.pos[1] - self.image.get_width()) <= rect.bottom <= int(self.pos[1] + self.image.get_width()):
                     #self.pos[1] = int(rect.bottom + self.image.get_width()/2)
                     state = 'horizontal'
             """    
@@ -53,7 +53,7 @@ class Ball: #pg.Sprite.sprite
                 self.pos[1] = int(rect.top - self.image.get_width()/2)
             """
             
-               
+    
         
         direction, self.velocity = bounce(state, direction, self.velocity)
         direction = acvel(self.power, direction, self.velocity)[2]
