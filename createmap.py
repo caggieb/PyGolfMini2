@@ -2,6 +2,8 @@ import pygame as pg
 import sys
 
 NEIGHBOUR_OFFSETS = [(-1, 0), (-1, -1), (0, -1), (1, -1), (1, 0), (0, 0), (-1, 1), (0, 1), (1, 1)]
+NEIGHBOUR_OFFSETS = [(-1, 0), (0, -1), (1, 0),(0, 1)]
+
 PHYSICS_TILES = {'walls'}
 class MapCreator:
     def __init__(self, game, surf, maps ='maps/testmap.txt' , tile_dim = 16):

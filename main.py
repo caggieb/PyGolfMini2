@@ -1,6 +1,7 @@
 import pygame as pg 
 import sys
 import time
+import numpy as np
 
 from createmap import MapCreator
 from utilities import images_load
@@ -29,7 +30,7 @@ class Main:
         #instantiate all necessary classes
         self.map = MapCreator(self, self.screen)
         self.map.map_tiles()
-        
+        self.direction = 0
         self.center_offset =  (- (self.display.get_width()//2 - self.map.start[0]* self.map.tile_dim*1.25), - (self.display.get_height()//2 - self.map.start[1]* self.map.tile_dim*1.25))
         
         
@@ -38,7 +39,7 @@ class Main:
         self.shoot = None
         self.ball = Ball(self)
         
-        self.offset = pg.math.Vector2(self.center_offset[0], self.center_offset[1])
+        self.offset = pg.math.Vector2(0, 0)
         self.pwr_value = 0   
         self.running = True
     
@@ -61,18 +62,26 @@ class Main:
                         self.shoot = self.pwr_value
                         self.pwr_value = 0
                     
-            keys = pg.key.get_pressed()
             
             if keys[pg.K_SPACE]:
                 self.pwr_value = min(self.pwr_value*1.02 + 1, 100.)
-            #elif keys[pg.K_s]:
-            #    self.offset.x += 1
-            #    self.ball.pos[0] += 1
-            #elif keys[pg.K_e]:
-            #    self.offset.x -= 1
-            #    self.ball.pos[0] -= 1
-            self.offset[0] += self.ball.pos[0]
-            self.offset[1] += self.ball.pos[1]
+            elif keys[pg.K_d]:
+                self.direction += 1
+                self.ball.pos[0] +=1
+            elif keys[pg.K_a]:
+                self.direction += -1
+                self.ball.pos[0] -= 1
+            elif keys[pg.K_w]:
+                self.ball.pos[1] -= 1
+            elif keys[pg.K_s]:
+                self.ball.pos[1] += 1
+                     
+            
+            angle = (self.direction + np.pi) % (2 * np.pi) - np.pi
+            
+        
+            self.offset[0] = self.ball.pos[0] + self.center_offset[0]
+            self.offset[1] = self.ball.pos[1] + self.center_offset[1]
         
             self.pwr_value  = max(self.pwr_value  - 0.8, 0)     
             
@@ -86,7 +95,7 @@ class Main:
             
             
             
-            self.ball.physics(tilemap=self.map, direction=0)
+            self.ball.physics(tilemap=self.map, direction= angle)
             self.screen.blit(pg.transform.scale(self.display, self.screen.get_size()), (0, 0))
             #provisional 
             #pg.draw.rect(self.display, (255, 255, 255), pg.Rect(0, 0, self.display.get_width(), self.display.get_height()))
