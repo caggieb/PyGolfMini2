@@ -54,6 +54,7 @@ class MapCreator:
                     
     def render(self, surf, offset= (0, 0)):
         
+        surf.blit(self.game.assets['grass'][0], pg.Rect(192, 184, 7, 7))
         for x in range(int(offset[0] // self.tile_dim), int((offset[0] + surf.get_width()) // self.tile_dim + 1)):
             for y in range(int(offset[1] // self.tile_dim), int((offset[1] + surf.get_height()) // self.tile_dim + 1)):
                 loc = str(x) + ':' + str(y)

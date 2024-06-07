@@ -115,7 +115,7 @@ class Main:
                 self.powerbar.custom_update()
                 
                 
-                self.ball.physics(tilemap=self.map, direction= angle, surf=self.display)
+                self.ball.physics(tilemap=self.map, direction= angle)
                 self.screen.blit(pg.transform.scale(self.display, self.screen.get_size()), (0, 0))
                 
                 self.screen.blit(self.rot_arrow, self.rot_arrow_rect)
