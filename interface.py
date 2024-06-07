@@ -78,12 +78,11 @@ class Button: #creates a clickable and hoverable button
             if self.action:
                 self.action()
                 
-class Main_menu: #creates the main menu for starting the game
-    def __init__(self):
-        self.display = pg.display.get_surface()
+class Main_menu: 
+    def __init__(self, game):
+        self.game = game
         self.buttons = []
         self.create_buttons()
-        self.started = False
         
     def create_buttons(self):
         button_width = 200
@@ -105,7 +104,7 @@ class Main_menu: #creates the main menu for starting the game
             if event.type == pg.QUIT:
                     self.quit_game()
                     exit()
-            elif not self.started:
+            elif not self.game.started:
                 if event.type == pg.MOUSEMOTION:
                     for button in self.buttons:
                         button.check_hover(event.pos)
@@ -115,7 +114,7 @@ class Main_menu: #creates the main menu for starting the game
         
     
     def start(self): 
-        self.started = True
+        self.game.started = True
         print('Game has Started')
         
     
@@ -123,7 +122,7 @@ class Main_menu: #creates the main menu for starting the game
         print('show instruction')
         
     
-    def draw(self):
-        self.display.fill(TURQOISE)
+    def draw(self, surf):
+        surf.fill(TURQOISE)
         for button in self.buttons:
             button.draw()
