@@ -71,7 +71,7 @@ def position(vel, pos):
     pos = [x,y]
     return pos
 
-
+"""
 #purely testing purpose
 while i < 30:
  
@@ -98,13 +98,8 @@ while i < 30:
     i += 1
     time.sleep(0.1)
 
-# Create the plot
 plt.plot(positx, posity)
 
-# Add labels and title (optional)
-plt.xlabel('X Values')
-plt.ylabel('Y Values')
-plt.title('Line Plot Example')
-
-# Display the plot
 plt.show()
+
+"""
