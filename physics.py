@@ -37,12 +37,12 @@ def bounce(state, direction, vel):
 
 def acvel(force, direction, vel):
 
-    if direction < np.pi:
-        accx = force * np.cos(direction)
-        accy = force * np.sin(direction)
-    else:
-        accx = -force * np.cos(direction)
-        accy = -force * np.sin(direction)
+    #if direction < np.pi:
+    accx = force * np.cos(direction)
+    accy = force * np.sin(direction)
+    #else:
+    #    accx = -force * np.cos(direction)
+    #    accy = -force * np.sin(direction)
 
     velx = vel[0]
     vely = vel[1]
