@@ -39,8 +39,6 @@ class Main:
         
         self.win = False
         self.num = 0
-        self.font = pg.font.Font("fonts\Pixeltype.ttf", 20)
-        self.black = (0,0,0)
         
         self.powerbar = PowerBar(self)      
         self.shoot = None
@@ -87,8 +85,7 @@ class Main:
             self.rot_arrow = pg.transform.rotate(self.arrow, np.degrees(- angle - np.pi*0.5))
             self.rot_arrow_rect = self.rot_arrow.get_rect(center=(120, 120))
             
-            text_surface = self.font.render(str(self.num), True, self.black)
-            text_rect = text_surface.get_rect(center=(WIDTH//2, HEIGHT//2))
+            
             
         
             self.offset[0] = int(self.ball.pos[0] + self.center_offset[0])
