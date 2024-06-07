@@ -10,7 +10,7 @@ class Ball: #pg.Sprite.sprite
         
         self.image = pg.image.load('images/balls/ball.png')
         self.rect = self.image.get_rect()
-        #self.rect.center = (self.game.screen.get_width()//2, self.game.screen.get_height()//2)
+        self.rect.center = (self.game.screen.get_width()//2, self.game.screen.get_height()//2)
         
     def physics(self, tilemap):
         if self.game.shoot:
