@@ -1,0 +1,5 @@
+                            **Welcome to PyGolfMini2!**
+-	To play, use you’re A and D keys to change the direction of your shot.
+-	The direction you are pointing in is indicated by the red arrow in the top left corner.
+-	Hold spacebar to increase power and balance it to pick a desired amount of power
+-   The amount of shots you have taken so far is also displayed above the direction indicator
