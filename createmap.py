@@ -2,7 +2,7 @@ import pygame as pg
 import sys
 
 NEIGHBOUR_OFFSETS = [(-1, 0), (-1, -1), (0, -1), (1, -1), (1, 0), (0, 0), (-1, 1), (0, 1), (1, 1)]
-
+PHYSICS_TILES = {'walls'}
 class MapCreator:
     def __init__(self, game, surf, maps ='maps/testmap.txt' , tile_dim = 16):
             self.mapfile = [open(maps).readlines()[i].strip('\n') for i in range(len(open(maps).readlines()))]
@@ -21,6 +21,7 @@ class MapCreator:
         return tiles
                 
     def map_tiles(self):
+        self.rects = []
         for y, row in enumerate(self.mapfile):
             for x, tile in enumerate(row):
                 loc = str(x) + ':' + str(y)
@@ -31,9 +32,17 @@ class MapCreator:
                 elif int(tile) == 3:
                     self.map[loc] = {'type' : 'start', 'variant' : 0, 'pos' : [x, y]}
                     
+    def rects_around(self, pos):
+        rects = []
+        for tile in self.tiles_nearby(pos):
+            if tile['type'] in PHYSICS_TILES:
+                rects.append(pg.Rect(tile['pos'][0] * self.tile_dim, tile['pos'][1] * self.tile_dim, self.tile_dim, self.tile_dim))
+        return rects
+                    
+                    
     def render(self, surf, offset= (0, 0)):
-        for x in range(int(offset[0] // self.tile_dim), self.display.get_width()):
-            for y in range(int(offset[1] // self.tile_dim), self.display.get_height()):
+        for x in range(int(offset[0] // self.tile_dim), int((offset[0] + surf.get_width()) // self.tile_dim + 1)):
+            for y in range(int(offset[1] // self.tile_dim), int((offset[1] + surf.get_height()) // self.tile_dim + 1)):
                 loc = str(x) + ':' + str(y)
                 if loc in self.map:
                     tile = self.map[loc]

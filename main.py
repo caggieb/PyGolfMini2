@@ -1,12 +1,12 @@
 import pygame as pg 
 import sys
-
+import time
 
 from createmap import MapCreator
 from utilities import images_load
-from physics import force, bounce, acvel, position
-from interface import Interface, PowerBar
-
+#from physics import force, bounce, acvel, position
+from interface import PowerBar
+from entities import Ball
 
 class Main:
     def __init__(self):
@@ -22,7 +22,6 @@ class Main:
             'green' : [],
             'walls' : images_load('images/walls'),
             'empty' :0,
-            'ball'  : images_load('images/balls'),
             'powerbar' : images_load('images/interface'),
             'start' : images_load('images/start')
         }
@@ -31,16 +30,21 @@ class Main:
         self.map = MapCreator(self, self.screen)
         self.map.map_tiles()
         
-        self.interface = Interface(self)
-        PowerBar(self.interface, self)      
+        self.powerbar = PowerBar(self)      
+        
+        self.ball = Ball(self)
         
         self.offset = pg.math.Vector2(0, 0)
-        
+        self.pwr_value = 0   
         self.running = True
+    
         
         
     def run(self):
         while self.running:
+            start_time = time.time()
+            
+            keys = pg.key.get_pressed()
             for event in pg.event.get():
                 if event.type == pg.QUIT:
                     pg.quit()
@@ -49,18 +53,42 @@ class Main:
                     if event.key == pg.K_ESCAPE:
                         pg.quit()
                         sys.exit()
-                        
+                    elif event.key == pg.K_s and keys[pg.K_SPACE]:
+                        self.shoot = self.pwr_value
+                        self.pwr_value = 0
+                    
+                   
             keys = pg.key.get_pressed()
-            if keys[pg.K_SPACE]:
-                self.pwr_value = min(self.value*1.02 + 1, 100.)
-                
-
-            self.display.fill((0, 0, 0)) #provisional
             
-            self.interface.draw(self.screen)
+            if keys[pg.K_SPACE]:
+                self.pwr_value = min(self.pwr_value*1.02 + 1, 100.)
+            #elif keys[pg.K_w]:
+            #     self.offset.x += 1      
+            self.pwr_value  = max(self.pwr_value  - 0.8, 0)    
+            
+            self.offset.x = self.ball.pos[0]
+            self.offset.y = self.ball.pos[1]
+            
+            #self.ball.physics(tilemap=self.map)
+            #self.map.tiles_nearby()
+            
+            self.display.fill((0, 0, 0)) #provisional
             self.map.render(self.display, offset=self.offset)
+            self.powerbar.custom_update()
+            
+            
             
             self.screen.blit(pg.transform.scale(self.display, self.screen.get_size()), (0, 0))
+            #self.ball.render(self.screen)
+            self.powerbar.draw(self.screen)
+            
+            
+            
             pg.display.update()
+            
+            
+            
+            elapsed_time = time.time() - start_time
+            print(f"Frame Time: {elapsed_time * 1000:.2f} ms")
             self.clock.tick(60)
 Main().run()
