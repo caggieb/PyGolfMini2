@@ -64,6 +64,7 @@ class Main:
         
     def run(self):
         while self.running:
+            win = False
             if not self.started:
                 events = pg.event.get()
                 self.mainmenu.handle_events(events)
@@ -129,8 +130,12 @@ class Main:
                 print(self.win)
                 if self.win:
                     self.screen.blit(self.win_text_surf, self.win_text_rect)
-                    time.sleep(300)
-                    self.running = False      
+                    win = True
+
+                if win == True:
+                    time.sleep(2)
+                    sys.exit
+
             
             pg.display.update()
             
