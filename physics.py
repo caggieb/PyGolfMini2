@@ -2,16 +2,16 @@ import numpy as np
 import time
 import matplotlib.pyplot as plt
 
-f = 10 #shot power
-f_multiplier = 0.08 
-i = 0
 
-velo = [0,0] #starting velocity
-posi = [0,0] #starting position
-direct = -np.pi/3   #starting direction in rads
+f_multiplier = 0.3 
+#i = 0
 
-positx = []
-posity = []
+#velo = [0,0] #starting velocity
+#posi = [0,0] #starting position
+#direct = -np.pi/3   #starting direction in rads
+
+#positx = []
+#posity = []
 
 def force(speed):
     force = -f_multiplier * speed**(1/2)

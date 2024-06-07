@@ -6,8 +6,7 @@ class Ball: #pg.Sprite.sprite
     def __init__(self, game):
         #super().__init__(group)
         self.game = game
-        
-        self.velo = [0,0]
+        self.power = 0
         
         self.pos = [0, 0]
         
@@ -15,37 +14,25 @@ class Ball: #pg.Sprite.sprite
         self.rect = self.image.get_rect()
         self.rect.center = (self.game.screen.get_width()//2, self.game.screen.get_height()//2)
         
-    def physics(self, tilemap, posi, velo, direction, state):
-        if self.game.shoot:
-            power = self.game.shoot
-            self.game.shoot = None   
-        print(tilemap.rects_around)
-
-
-        
-        direction ,self.velo = bounce(state, direction, velo)
-        direction = acvel(power,direction,velo)[2]
-        velo = acvel(power,direct,velo)[0]
-        posi = position(velo, posi)
-
-        power = force(acvel(f,direct,velo)[1])
-
+        self.velocity = [0,0]
         
         
-    
-    def physics(self, tilemap):
+    def physics(self, tilemap, direction, state = None):
         ball_rect = pg.Rect(self.pos[0], self.pos[1], self.image.get_width(), self.image.get_height())
         if self.game.shoot:
-            power = self.game.shoot
+            self.power = self.game.shoot * 0.01
             self.game.shoot = None   
-        #print(tilemap.rects_around(self.pos))
-        #print(ball_rect)
+       
         for rect in tilemap.rects_around(self.pos):
             if rect.colliderect(ball_rect):
                pass
-            
         
-        
+        direction, self.velocity = bounce(state, direction, self.velocity)
+        direction = acvel(self.power, direction, self.velocity)[2]
+        self.velocity = acvel(self.power, direction, self.velocity)[0]
+        self.pos = position(self.velocity, self.pos)
+        print(self.power)
+        self.power = force(acvel(self.power, direction ,self.velocity)[1])
     
     def render(self, surf):
         surf.blit(self.image, self.rect)

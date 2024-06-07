@@ -65,13 +65,14 @@ class Main:
             
             if keys[pg.K_SPACE]:
                 self.pwr_value = min(self.pwr_value*1.02 + 1, 100.)
-            elif keys[pg.K_s]:
-                self.offset.x += 1
-                self.ball.pos[0] += 1
-            elif keys[pg.K_e]:
-                self.offset.x -= 1
-                self.ball.pos[0] -= 1
-                
+            #elif keys[pg.K_s]:
+            #    self.offset.x += 1
+            #    self.ball.pos[0] += 1
+            #elif keys[pg.K_e]:
+            #    self.offset.x -= 1
+            #    self.ball.pos[0] -= 1
+            self.offset[0] += self.ball.pos[0]
+            self.offset[1] += self.ball.pos[1]
         
             self.pwr_value  = max(self.pwr_value  - 0.8, 0)     
             
@@ -85,9 +86,9 @@ class Main:
             
             
             
-            self.ball.physics(tilemap=self.map)
+            self.ball.physics(tilemap=self.map, direction=0)
             self.screen.blit(pg.transform.scale(self.display, self.screen.get_size()), (0, 0))
-            #provisional
+            #provisional 
             #pg.draw.rect(self.display, (255, 255, 255), pg.Rect(0, 0, self.display.get_width(), self.display.get_height()))
             
             #self.screen.blit(self.display, (0, 0))
