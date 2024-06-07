@@ -119,7 +119,15 @@ class Main_menu:
         
     
     def instructions(self):
-        print('show instruction')
+        file_path = "instructions.txt"
+        try:
+            with open(file_path, 'r') as file:
+                contents = file.read()
+            print(contents)
+        except FileNotFoundError:
+            print(f"The file {file_path} does not exist.")
+        except IOError:
+            print(f"An error occurred while reading the file {file_path}.")
         
     
     def draw(self, surf):
