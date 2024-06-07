@@ -1,5 +1,6 @@
 import numpy as np
 import time
+import matplotlib.pyplot as plt
 
 f = 10 #shot power
 f_multiplier = 0.08 
@@ -8,6 +9,9 @@ i = 0
 velo = [0,0] #starting velocity
 posi = [0,0] #starting position
 direct = np.pi/3   #starting direction in rads
+
+positx = []
+posity = []
 
 def force(speed):
     force = -f_multiplier * speed**(1/2)
@@ -21,7 +25,7 @@ def bounce(state, direction, vel):
         direction = np.pi - direction
         vely = -vely 
         
-    if state == "vertical":
+    elif state == "vertical":
         direction = (direction - np.pi)* -1
         velx = -velx
     else:
@@ -32,8 +36,13 @@ def bounce(state, direction, vel):
 
 
 def acvel(force, direction, vel):
-    accx = force * np.cos(direction)
-    accy = force * np.sin(direction)
+
+    if direction < np.pi:
+        accx = force * np.cos(direction)
+        accy = force * np.sin(direction)
+    else:
+        accx = -force * np.cos(direction)
+        accy = -force * np.sin(direction)
 
     velx = vel[0]
     vely = vel[1]
@@ -42,7 +51,9 @@ def acvel(force, direction, vel):
     vely += accy
 
 
-    direction = np.arctan(vely/velx)
+    
+    direction = np.arctan2(vely, velx)
+
 
     speed = ((velx**2)+(vely**2))
 
@@ -62,23 +73,28 @@ def position(vel, pos):
 
 """
 #purely testing purpose
-while i < 20:
+while i < 30:
  
+    positx.append(posi[0])
+    posity.append(posi[1])
+
 
     if i == 10:
-        state = "horizontal"
+        state = "vertical"
     else:
         state = 0
     
     direct, velo = bounce(state, direct, velo)
     
+    direct = acvel(f,direct,velo)[2]
+
     velo = acvel(f,direct,velo)[0]
     posi = position(velo, posi)
     
     print(velo)
 
     f = force(acvel(f,direct,velo)[1])
-    
+
     i += 1
     time.sleep(0.1)
 """
