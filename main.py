@@ -30,11 +30,15 @@ class Main:
         self.map = MapCreator(self, self.screen)
         self.map.map_tiles()
         
+        self.center_offset =  (- (self.display.get_width()//2 - self.map.start[0]* self.map.tile_dim*1.25), - (self.display.get_height()//2 - self.map.start[1]* self.map.tile_dim*1.25))
+        
+        
+        
         self.powerbar = PowerBar(self)      
         self.shoot = None
         self.ball = Ball(self)
         
-        self.offset = pg.math.Vector2(0, 0)
+        self.offset = pg.math.Vector2(self.center_offset[0], self.center_offset[1])
         self.pwr_value = 0   
         self.running = True
     
@@ -63,22 +67,30 @@ class Main:
                 self.pwr_value = min(self.pwr_value*1.02 + 1, 100.)
             elif keys[pg.K_s]:
                 self.offset.x += 1
+                self.ball.pos[0] += 1
+            elif keys[pg.K_e]:
+                self.offset.x -= 1
+                self.ball.pos[0] -= 1
+                
         
-            self.pwr_value  = max(self.pwr_value  - 0.8, 0)    
+            self.pwr_value  = max(self.pwr_value  - 0.8, 0)     
             
-            self.ball.pos[0] = self.offset.x 
-            self.offset.y = self.ball.pos[1]
+            #self.map.
+            # tiwles_nearby()
             
-            self.ball.physics(tilemap=self.map)
-            #self.map.tiles_nearby()
+            self.display.fill((0, 0, 0)) 
             
-            self.display.fill((0, 0, 0)) #provisional
             self.map.render(self.display, offset=self.offset)
             self.powerbar.custom_update()
             
             
             
+            self.ball.physics(tilemap=self.map)
             self.screen.blit(pg.transform.scale(self.display, self.screen.get_size()), (0, 0))
+            #provisional
+            #pg.draw.rect(self.display, (255, 255, 255), pg.Rect(0, 0, self.display.get_width(), self.display.get_height()))
+            
+            #self.screen.blit(self.display, (0, 0))
             self.ball.render(self.screen)
             self.powerbar.draw(self.screen)
             

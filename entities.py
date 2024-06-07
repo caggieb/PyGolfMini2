@@ -13,14 +13,16 @@ class Ball: #pg.Sprite.sprite
         self.rect.center = (self.game.screen.get_width()//2, self.game.screen.get_height()//2)
         
     def physics(self, tilemap):
-        
-        
+        ball_rect = pg.Rect(self.pos[0], self.pos[1], self.image.get_width(), self.image.get_height())
         if self.game.shoot:
             power = self.game.shoot
             self.game.shoot = None   
         #print(tilemap.rects_around(self.pos))
-        #if self.pos in tilemap.rects_around:
-        #    print('gino')
+        #print(ball_rect)
+        for rect in tilemap.rects_around(self.pos):
+            if rect.colliderect(ball_rect):
+               pass
+            
         
         
     
