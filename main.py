@@ -65,6 +65,7 @@ class Main:
             
             if keys[pg.K_SPACE]:
                 self.pwr_value = min(self.pwr_value*1.02 + 1, 100.)
+            """
             elif keys[pg.K_d]:
                 self.direction += 1
                 self.ball.pos[0] +=1
@@ -74,14 +75,15 @@ class Main:
             elif keys[pg.K_w]:
                 self.ball.pos[1] -= 1
             elif keys[pg.K_s]:
+
                 self.ball.pos[1] += 1
-                     
+            """
             
             angle = (self.direction + np.pi) % (2 * np.pi) - np.pi
             
         
-            self.offset[0] = self.ball.pos[0] + self.center_offset[0]
-            self.offset[1] = self.ball.pos[1] + self.center_offset[1]
+            self.offset[0] = int(self.ball.pos[0] + self.center_offset[0])
+            self.offset[1] = int(self.ball.pos[1] + self.center_offset[1])
         
             self.pwr_value  = max(self.pwr_value  - 0.8, 0)     
             

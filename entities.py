@@ -25,10 +25,25 @@ class Ball: #pg.Sprite.sprite
             self.game.shoot = None   
             
         #
-        print(tilemap.rects_around(self.pos))
+    
         for rect in tilemap.rects_around(self.pos):
-            if ball_rect.right == rect.left:
-                self.pos[0] = int(rect.left - self.image.get_width()/2)
+            if ball_rect.colliderect(rect):
+                if  int(self.pos[0]) <= rect.left <= int(self.pos[0] + self.image.get_width()/2):
+                    state = 'vertical'
+                    #self.pos[0] = int(rect.left - self.image.get_width()/2)
+                
+                elif int(self.pos[0]) >= rect.right >= int(self.pos[0] - self.image.get_width()/2):
+                    #self.pos[0] = int(rect.right + self.image.get_width()/2)
+                    state = 'vertical'
+                    
+                elif int(self.pos[1]) >= rect.top >= int(self.pos[1] - self.image.get_width()/2):
+                    #self.pos[1] = int(rect.top - self.image.get_width()/2)
+                    state = 'horizontal'
+                elif int(self.pos[1]) <= rect.bottom <= int(self.pos[1] + self.image.get_width()/2):
+                    #self.pos[1] = int(rect.bottom + self.image.get_width()/2)
+                    state = 'horizontal'
+            """    
+            
             elif ball_rect.left == rect.right:
                 self.pos[0] = int(rect.right + self.image.get_width()/2)
                 
@@ -36,13 +51,14 @@ class Ball: #pg.Sprite.sprite
                 self.pos[1] = int(rect.bottom + self.image.get_width()/2)
             elif ball_rect.bottom == rect.top:
                 self.pos[1] = int(rect.top - self.image.get_width()/2)
+            """
             
                
         
         direction, self.velocity = bounce(state, direction, self.velocity)
         direction = acvel(self.power, direction, self.velocity)[2]
         self.velocity = acvel(self.power, direction, self.velocity)[0]
-        #self.pos = position(self.velocity, self.pos)
+        self.pos = position(self.velocity, self.pos)
         #print(self.power)
         self.power = force(acvel(self.power, direction ,self.velocity)[1])
     
