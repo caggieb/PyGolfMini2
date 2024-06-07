@@ -6,9 +6,10 @@ class Ball: #pg.Sprite.sprite
     def __init__(self, game):
         #super().__init__(group)
         self.game = game
-        self.pos = pg.math.Vector2(0, 0)
+        
         self.velo = [0,0]
         
+        self.pos = [0, 0]
         
         self.image = pg.image.load('images/balls/ball.png')
         self.rect = self.image.get_rect()
@@ -30,9 +31,16 @@ class Ball: #pg.Sprite.sprite
         
         power = force(acvel(f,direct,velo)[1])
     
+    def physics(self, tilemap):
+        
+        
+        if self.game.shoot:
+            power = self.game.shoot
+            self.game.shoot = None   
+        #print(tilemap.rects_around(self.pos))
         #if self.pos in tilemap.rects_around:
         #    print('gino')
-            
+        
         
     
     def render(self, surf):
