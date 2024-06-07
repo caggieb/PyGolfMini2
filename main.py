@@ -94,7 +94,7 @@ class Main:
             self.rot_arrow = pg.transform.rotate(self.arrow, np.degrees(- angle - np.pi*0.5))
             self.rot_arrow_rect = self.rot_arrow.get_rect(center=(120, 120))
             
-            text_surface = self.font.render(str(self.num), True, self.black)
+            text_surface = self.font.render(("Shots: " + str(self.num)), True, self.black)
             text_rect = text_surface.get_rect(topleft=(10, 10))
             
         
