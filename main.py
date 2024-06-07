@@ -72,7 +72,7 @@ class Main:
                         self.pwr_value = 0
                         self.num += 1
                     
-            print(self.num)        
+           
             
             if keys[pg.K_SPACE]:
                 self.pwr_value = min(self.pwr_value*1.02 + 1, 100.)
@@ -89,8 +89,8 @@ class Main:
             self.rot_arrow = pg.transform.rotate(self.arrow, np.degrees(- angle - np.pi*0.5))
             self.rot_arrow_rect = self.rot_arrow.get_rect(center=(120, 120))
             
-            text_surface = self.font.render(str(self.num), True, self.black)
-            text_rect = text_surface.get_rect(topleft=(10, 10))
+            
+            text_rect = text_surface.get_rect()
             self.screen.blit(text_surface, text_rect)
         
             self.offset[0] = int(self.ball.pos[0] + self.center_offset[0])
