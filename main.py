@@ -27,8 +27,7 @@ class Main:
             'start' : images_load('images/start'),
             'flag' : images_load('images/flag')
         }
-        #print(self.assets['walls'])
-        #instantiate all necessary classes
+        
         self.map = MapCreator(self, self.screen)
         self.map.map_tiles()
         self.direction = 0
@@ -36,10 +35,9 @@ class Main:
         
         self.arrow = pg.image.load('images/interface/arrow.png').convert_alpha()
         self.arrow = pg.transform.scale(self.arrow, (44, 60))
-        #self.arrow_rect = self.arrow.get_rect()
-        #self.arrow_rect.center = (120, 120)
         
         
+        self.win = False
         
         self.powerbar = PowerBar(self)      
         self.shoot = None
@@ -115,7 +113,10 @@ class Main:
             pg.display.update()
             
             elapsed_time = time.time() - start_time
-
+            if self.win:
+                
+                self.screen.blit()        
+            
             #print(f"Frame Time: {elapsed_time * 1000:.2f} ms")
             self.clock.tick(60)
 Main().run()

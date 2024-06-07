@@ -25,8 +25,8 @@ class Ball: #pg.Sprite.sprite
             self.game.shoot = None   
             
         #
-    
-        for rect in tilemap.rects_around(self.pos):
+        rects, end_rect = tilemap.rects_around(self.pos)
+        for rect in rects:
             if ball_rect.colliderect(rect):
                 if  int(self.pos[0] - self.image.get_width()) <= rect.left <= int(self.pos[0] + self.image.get_width()):
                     state = 'vertical'
@@ -38,6 +38,9 @@ class Ball: #pg.Sprite.sprite
                     state = 'horizontal'
                 elif int(self.pos[1] - self.image.get_width()) <= rect.bottom <= int(self.pos[1] + self.image.get_width()):
                     state = 'horizontal'
+        
+        if ball_rect.colliderect(end_rect):
+            self.game.win = True
     
         
         direction, self.velocity = bounce(state, direction, self.velocity)

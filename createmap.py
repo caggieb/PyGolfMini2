@@ -53,7 +53,7 @@ class MapCreator:
             if tile['type'] in PHYSICS_TILES:
                 rects.append(pg.Rect((tile['pos'][0] - self.start[0]*1.25) * self.tile_dim , (tile['pos'][1] - self.start[1]*1.25) * self.tile_dim, self.tile_dim, self.tile_dim))
         """
-        return rects
+        return rects, end_rect
                     
                     
     def render(self, surf, offset= (0, 0)):
