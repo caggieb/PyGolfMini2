@@ -47,6 +47,10 @@ class Main:
         self.offset = pg.math.Vector2(0, 0)
         self.pwr_value = 0   
         self.running = True
+
+        self.font = pg.font.Font("fonts\Pixeltype.ttf", 50)
+        self.black = (0,0,0)
+            
     
         
         
@@ -87,13 +91,12 @@ class Main:
             
             text_surface = self.font.render(str(self.num), True, self.black)
             text_rect = text_surface.get_rect(topleft=(10, 10))
-            
+            self.screen.blit(text_surface, text_rect)
         
             self.offset[0] = int(self.ball.pos[0] + self.center_offset[0])
             self.offset[1] = int(self.ball.pos[1] + self.center_offset[1])
         
             self.pwr_value  = max(self.pwr_value  - 0.8, 0)     
-            
             
             self.display.fill((0, 125, 178)) 
             
