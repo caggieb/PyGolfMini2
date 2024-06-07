@@ -54,7 +54,7 @@ class Main:
         
         
         self.win_text_surf = self.font.render('You Won!', True, (255, 0, 0))
-        self.win_text_rect =  self.win_text_suf.get_rect(center=(self.screen.get_width() / 2, self.screen.get_height() / 2))
+        self.win_text_rect =  self.win_text_surf.get_rect(center=(self.screen.get_width() / 2, self.screen.get_height() / 2))
             
     
         
