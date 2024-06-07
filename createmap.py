@@ -3,7 +3,7 @@ import sys
 
 NEIGHBOUR_OFFSETS = [(-1, 0), (-1, -1), (0, -1), (1, -1), (1, 0), (0, 0), (-1, 1), (0, 1), (1, 1)]
 NEIGHBOUR_OFFSETS = [(-1, 0), (0, -1), (1, 0),(0, 1)]
-
+#maps/testmap.txt
 PHYSICS_TILES = {'walls'}
 class MapCreator:
     def __init__(self, game, surf, maps ='maps/testmap.txt' , tile_dim = 16):
@@ -36,6 +36,9 @@ class MapCreator:
                 elif int(tile) == 3:
                     self.map[loc] = {'type' : 'start', 'variant' : 0, 'pos' : [x, y]}
                     self.start = (x, y)
+                elif int(tile) == 4:
+                    self.map[loc] = {'type' : 'end', 'variant' : 0, 'pos' : [x, y]}
+                    self.end = (x, y)
         
                     
     def rects_around(self, pos):

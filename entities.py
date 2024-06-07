@@ -30,29 +30,14 @@ class Ball: #pg.Sprite.sprite
             if ball_rect.colliderect(rect):
                 if  int(self.pos[0] - self.image.get_width()) <= rect.left <= int(self.pos[0] + self.image.get_width()):
                     state = 'vertical'
-                    #self.pos[0] = int(rect.left - self.image.get_width()/2)
                 
                 elif int(self.pos[0] + self.image.get_width()) >= rect.right >= int(self.pos[0] - self.image.get_width()):
-                    #self.pos[0] = int(rect.right + self.image.get_width()/2)
                     state = 'vertical'
                     
-                elif int(self.pos[1] + self.image.get_width()) >= rect.top >= int(self.pos[1] - self.image.get_width()):
-                    #self.pos[1] = int(rect.top - self.image.get_width()/2)
+                if int(self.pos[1] + self.image.get_width()) >= rect.top >= int(self.pos[1] - self.image.get_width()):
                     state = 'horizontal'
                 elif int(self.pos[1] - self.image.get_width()) <= rect.bottom <= int(self.pos[1] + self.image.get_width()):
-                    #self.pos[1] = int(rect.bottom + self.image.get_width()/2)
                     state = 'horizontal'
-            """    
-            
-            elif ball_rect.left == rect.right:
-                self.pos[0] = int(rect.right + self.image.get_width()/2)
-                
-            elif ball_rect.top == rect.bottom:
-                self.pos[1] = int(rect.bottom + self.image.get_width()/2)
-            elif ball_rect.bottom == rect.top:
-                self.pos[1] = int(rect.top - self.image.get_width()/2)
-            """
-            
     
         
         direction, self.velocity = bounce(state, direction, self.velocity)

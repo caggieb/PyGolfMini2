@@ -4,7 +4,7 @@ import pygame as pg
 class PowerBar:
     def __init__(self, game):
         self.game = game
-        self.image = self.game.assets['powerbar'][0]
+        self.image = pg.image.load('images/interface/pwr-bar.png')
         
         
         self.rect = self.image.get_rect()

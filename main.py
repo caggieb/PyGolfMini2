@@ -24,7 +24,8 @@ class Main:
             'walls' : images_load('images/walls'),
             'empty' :0,
             'powerbar' : images_load('images/interface'),
-            'start' : images_load('images/start')
+            'start' : images_load('images/start'),
+            'flag' : images_load('images/flag')
         }
         #print(self.assets['walls'])
         #instantiate all necessary classes
@@ -32,6 +33,11 @@ class Main:
         self.map.map_tiles()
         self.direction = 0
         self.center_offset =  (- (self.display.get_width()//2 - self.map.start[0]* self.map.tile_dim*1.25), - (self.display.get_height()//2 - self.map.start[1]* self.map.tile_dim*1.25))
+        
+        self.arrow = pg.image.load('images/interface/arrow.png').convert_alpha()
+        self.arrow = pg.transform.scale(self.arrow, (44, 60))
+        #self.arrow_rect = self.arrow.get_rect()
+        #self.arrow_rect.center = (120, 120)
         
         
         
@@ -75,6 +81,11 @@ class Main:
             
             angle = (self.direction + np.pi) % (2 * np.pi) - np.pi
             
+            self.rot_arrow = pg.transform.rotate(self.arrow, np.degrees(- angle - np.pi*0.5))
+            self.rot_arrow_rect = self.rot_arrow.get_rect(center=(120, 120))
+            
+            
+            
         
             self.offset[0] = int(self.ball.pos[0] + self.center_offset[0])
             self.offset[1] = int(self.ball.pos[1] + self.center_offset[1])
@@ -82,7 +93,7 @@ class Main:
             self.pwr_value  = max(self.pwr_value  - 0.8, 0)     
             
             
-            self.display.fill((0, 0, 0)) 
+            self.display.fill((0, 125, 178)) 
             
             self.map.render(self.display, offset=self.offset)
             self.powerbar.custom_update()
@@ -91,9 +102,11 @@ class Main:
             self.ball.physics(tilemap=self.map, direction= angle)
             self.screen.blit(pg.transform.scale(self.display, self.screen.get_size()), (0, 0))
             #provisional 
-            #pg.draw.rect(self.display, (255, 255, 255), pg.Rect(0, 0, self.display.get_width(), self.display.get_height()))
             
-            #self.screen.blit(self.display, (0, 0))
+            
+            
+            
+            self.screen.blit(self.rot_arrow, self.rot_arrow_rect)
             self.ball.render(self.screen)
             self.powerbar.draw(self.screen)
             
@@ -102,6 +115,7 @@ class Main:
             pg.display.update()
             
             elapsed_time = time.time() - start_time
+
             #print(f"Frame Time: {elapsed_time * 1000:.2f} ms")
             self.clock.tick(60)
 Main().run()
