@@ -32,6 +32,7 @@ class Main:
         
         self.powerbar = PowerBar(self)      
         
+        
         self.ball = Ball(self)
         
         self.offset = pg.math.Vector2(0, 0)
@@ -62,11 +63,11 @@ class Main:
             
             if keys[pg.K_SPACE]:
                 self.pwr_value = min(self.pwr_value*1.02 + 1, 100.)
-            #elif keys[pg.K_w]:
-            #     self.offset.x += 1      
+            elif keys[pg.K_w]:
+                 self.offset.x += 1      
             self.pwr_value  = max(self.pwr_value  - 0.8, 0)    
             
-            self.offset.x = self.ball.pos[0]
+            #self.offset.x = self.ball.pos[0]
             self.offset.y = self.ball.pos[1]
             
             #self.ball.physics(tilemap=self.map)
@@ -79,7 +80,7 @@ class Main:
             
             
             self.screen.blit(pg.transform.scale(self.display, self.screen.get_size()), (0, 0))
-            #self.ball.render(self.screen)
+            self.ball.render(self.screen)
             self.powerbar.draw(self.screen)
             
             
