@@ -17,14 +17,14 @@ class Ball: #pg.Sprite.sprite
         self.velocity = [0,0]
         
         
-    def physics(self, tilemap, direction, state = None):
+    def physics(self, tilemap, direction, state = None, surf = None):
         ball_rect = pg.Rect(self.pos[0] - self.image.get_width()/2, self.pos[1] - self.image.get_height()/2, self.image.get_width(), self.image.get_height())
         
         if self.game.shoot:
             self.power = (self.game.shoot**0.5)
             self.game.shoot = None   
             
-        #
+        
         rects, end_rect = tilemap.rects_around(self.pos)
         for rect in rects:
             if ball_rect.colliderect(rect):
@@ -40,6 +40,7 @@ class Ball: #pg.Sprite.sprite
                     state = 'horizontal'
         
         if ball_rect.colliderect(end_rect):
+
             self.game.win = True
     
         

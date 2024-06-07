@@ -20,7 +20,6 @@ class Main:
         
         self.assets = {
             'grass' : images_load('images/grass'),
-            'green' : [],
             'walls' : images_load('images/walls'),
             'empty' :0,
             'powerbar' : images_load('images/interface'),
@@ -125,8 +124,11 @@ class Main:
             pg.display.update()
             
             elapsed_time = time.time() - start_time
+            print(self.win)
             if self.win:
-                self.screen.blit(self.win_text_surf, self.win_text_rect)        
+                self.screen.blit(self.win_text_surf, self.win_text_rect)
+                time.sleep(300)
+                self.running = False      
             
             #print(f"Frame Time: {elapsed_time * 1000:.2f} ms")
             self.clock.tick(60)
