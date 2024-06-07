@@ -36,13 +36,14 @@ class MapCreator:
                 elif int(tile) == 3:
                     self.map[loc] = {'type' : 'start', 'variant' : 0, 'pos' : [x, y]}
                     self.start = (x, y)
-                elif int(tile) == 4:
-                    self.map[loc] = {'type' : 'end', 'variant' : 0, 'pos' : [x, y]}
+                elif int(tile) == 2:
+                    self.map[loc] = {'type' : 'flag', 'variant' : 0, 'pos' : [x, y]}
                     self.end = (x, y)
         
                     
     def rects_around(self, pos):
         rects = []
+        end_rect = pg.Rect((self.end[0] - self.start[0]*1.25) * self.tile_dim, (self.end[0] - self.start[0]*1.25) * self.tile_dim, 7, 7 )
         for tile in self.map.values():
             if tile['type'] in PHYSICS_TILES:
                 rects.append(pg.Rect((tile['pos'][0] - self.start[0]*1.25) * self.tile_dim , (tile['pos'][1] - self.start[1]*1.25) * self.tile_dim, self.tile_dim, self.tile_dim))
