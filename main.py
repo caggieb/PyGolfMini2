@@ -66,7 +66,9 @@ class Main:
         while self.running:
             start_time = time.time()
             
-            self.mainmenu.handle_events(event)
+            events = pg.event.get()
+
+            self.mainmenu.handle_events(events)
             self.mainmenu.draw()
 
 
