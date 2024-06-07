@@ -77,7 +77,7 @@ class Main:
                         self.pwr_value = 0
                         self.num += 1
                     
-            print(self.num)        
+           
             
             if keys[pg.K_SPACE]:
                 self.pwr_value = min(self.pwr_value*1.02 + 1, 100.)
