@@ -91,9 +91,9 @@ class Main:
                     self.pwr_value = min(self.pwr_value*1.02 + 1, 100.)
             
                 elif keys[pg.K_d]:
-                    self.direction += 0.01
+                    self.direction += 0.04
                 elif keys[pg.K_a]:
-                    self.direction += - 0.01
+                    self.direction += - 0.04
                     
                 angle = (self.direction + np.pi) % (2 * np.pi) - np.pi
                 
