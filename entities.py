@@ -32,7 +32,7 @@ class Ball: #pg.Sprite.sprite
             elif ball_rect.left == rect.right:
                 self.pos[0] = int(rect.right + self.image.get_width()/2)
                 
-            if ball_rect.top == rect.bottom:
+            elif ball_rect.top == rect.bottom:
                 self.pos[1] = int(rect.bottom + self.image.get_width()/2)
             elif ball_rect.bottom == rect.top:
                 self.pos[1] = int(rect.top - self.image.get_width()/2)
