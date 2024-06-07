@@ -50,6 +50,11 @@ class Main:
 
         self.font = pg.font.Font("fonts\Pixeltype.ttf", 50)
         self.black = (0,0,0)
+        
+        
+        
+        self.win_text_surf = self.font.render('You Won!', True, (255, 0, 0))
+        self.win_text_rect =  self.win_text_suf.get_rect(center=(self.screen.get_width() / 2, self.screen.get_height() / 2))
             
     
         
@@ -91,7 +96,7 @@ class Main:
             
             text_surface = self.font.render(str(self.num), True, self.black)
             text_rect = text_surface.get_rect(topleft=(10, 10))
-            self.screen.blit(text_surface, text_rect)
+            
         
             self.offset[0] = int(self.ball.pos[0] + self.center_offset[0])
             self.offset[1] = int(self.ball.pos[1] + self.center_offset[1])
@@ -116,13 +121,12 @@ class Main:
             self.powerbar.draw(self.screen)
             
             
-            
+            self.screen.blit(text_surface, text_rect)
             pg.display.update()
             
             elapsed_time = time.time() - start_time
             if self.win:
-                
-                self.screen.blit()        
+                self.screen.blit(self.win_text_surf, self.win_text_rect)        
             
             #print(f"Frame Time: {elapsed_time * 1000:.2f} ms")
             self.clock.tick(60)

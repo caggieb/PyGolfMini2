@@ -47,7 +47,7 @@ class Ball: #pg.Sprite.sprite
         direction = acvel(self.power, direction, self.velocity)[2]
         self.velocity = acvel(self.power, direction, self.velocity)[0]
         self.pos = position(self.velocity, self.pos)
-        #print(self.power)
+        
         self.power = force(acvel(self.power, direction ,self.velocity)[1])
     
     def render(self, surf):
