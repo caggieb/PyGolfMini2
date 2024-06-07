@@ -31,8 +31,7 @@ class Main:
         self.map.map_tiles()
         
         self.powerbar = PowerBar(self)      
-        
-        
+        self.shoot = None
         self.ball = Ball(self)
         
         self.offset = pg.math.Vector2(0, 0)
@@ -58,18 +57,19 @@ class Main:
                         self.shoot = self.pwr_value
                         self.pwr_value = 0
                     
-                   
             keys = pg.key.get_pressed()
             
             if keys[pg.K_SPACE]:
                 self.pwr_value = min(self.pwr_value*1.02 + 1, 100.)
+            elif keys[pg.K_s]:
+                self.offset.x += 1
         
             self.pwr_value  = max(self.pwr_value  - 0.8, 0)    
             
-            self.offset.x = self.ball.pos[0]
+            self.ball.pos[0] = self.offset.x 
             self.offset.y = self.ball.pos[1]
             
-            #self.ball.physics(tilemap=self.map)
+            self.ball.physics(tilemap=self.map)
             #self.map.tiles_nearby()
             
             self.display.fill((0, 0, 0)) #provisional
@@ -86,9 +86,7 @@ class Main:
             
             pg.display.update()
             
-            
-            
             elapsed_time = time.time() - start_time
-            print(f"Frame Time: {elapsed_time * 1000:.2f} ms")
+            #print(f"Frame Time: {elapsed_time * 1000:.2f} ms")
             self.clock.tick(60)
 Main().run()
